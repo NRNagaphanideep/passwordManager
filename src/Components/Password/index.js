@@ -33,10 +33,10 @@ class Password extends Component {
 
   onDeleteItem = id => {
     const {updateList} = this.state
-    const passwordsList = updateList.filter(
+    const searchResults = updateList.filter(
       eachPassword => eachPassword.id !== id,
     )
-    this.setState({updateList: passwordsList})
+    this.setState({updateList: searchResults})
   }
 
   onChangeWebInput = event => {
@@ -84,7 +84,7 @@ class Password extends Component {
     const searchResults = updateList.filter(eachPassword =>
       eachPassword.webInput.toLowerCase().includes(searchInput.toLowerCase()),
     )
-    const count = updateList.length
+    const count = searchResults.length
     return (
       <div className="app-container">
         <img
@@ -155,50 +155,52 @@ class Password extends Component {
         {/* //bottom card */}
 
         <div className="password-item-container">
-          <div className="password-title-container">
-            <div className="password-text-container">
-              <h1 className="password-title">Your Passwords</h1>
-              <p className="password-count">{count}</p>
-            </div>
-            <div className="search-input-container">
-              <img
-                src="https://assets.ccbp.in/frontend/react-js/password-manager-search-img.png"
-                alt="search"
-                className="search-logo"
-              />
-              <input
-                type="search"
-                placeholder="search"
-                className="search-input"
-                onChange={this.onChangeSearchList}
-                value={searchInput}
-              />
-            </div>
-          </div>
-          <hr />
-          <div className="show-password-container">
-            <input
-              type="checkbox"
-              checked={isChecked}
-              id="showPassword"
-              onChange={this.onChecked}
-            />
-            <label htmlFor="showPassword">Show passwords</label>
-          </div>
-          {count === 0 ? (
-            this.renderNoPasswordsView()
-          ) : (
-            <ul className="list-items-container">
-              {searchResults.map(eachPassword => (
-                <PasswordItem
-                  key={eachPassword.id}
-                  passwordDetails={eachPassword}
-                  isChecked={isChecked}
-                  onDeleteItem={this.onDeleteItem}
+          <div>
+            <div className="password-title-container">
+              <div className="password-text-container">
+                <h1 className="password-title">Your Passwords</h1>
+                <p className="password-count">{count}</p>
+              </div>
+              <div className="search-input-container">
+                <img
+                  src="https://assets.ccbp.in/frontend/react-js/password-manager-search-img.png"
+                  alt="search"
+                  className="search-logo"
                 />
-              ))}
-            </ul>
-          )}
+                <input
+                  type="search"
+                  placeholder="search"
+                  className="search-input"
+                  onChange={this.onChangeSearchList}
+                  value={searchInput}
+                />
+              </div>
+            </div>
+            <hr />
+            <div className="show-password-container">
+              <input
+                type="checkbox"
+                checked={isChecked}
+                id="showPassword"
+                onChange={this.onChecked}
+              />
+              <label htmlFor="showPassword">Show passwords</label>
+            </div>
+            {count === 0 ? (
+              this.renderNoPasswordsView()
+            ) : (
+              <ul className="list-items-container">
+                {searchResults.map(eachPassword => (
+                  <PasswordItem
+                    key={eachPassword.id}
+                    passwordDetails={eachPassword}
+                    isChecked={isChecked}
+                    onDeleteItem={this.onDeleteItem}
+                  />
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     )
