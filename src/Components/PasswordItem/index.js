@@ -24,13 +24,13 @@ const PasswordItem = props => {
   }
   return (
     <li className="list-item-container">
-      <div className="initial-section">
-        {initial}
+      <div className="initial-section">{initial}</div>
+      <div className="text-cont">
         <p className="heading">{webInput}</p>
         <p className="para">{userName}</p>
         {passwordItem}
       </div>
-      <div className="button-count">
+      <div className="button-cont">
         <button
           type="button"
           className="delete-button"
